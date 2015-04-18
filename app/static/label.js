@@ -1,0 +1,131 @@
+var choice = 'None';
+var label_post = 'None';
+var reason = 'None';
+var category = ['Meeting', 'Lecture', 'Study', 'Empty'];
+const GENERAL = '#33FFFF';
+const CHOSEN = '#91C7FF';
+
+
+// get label_post from he left side
+
+document.addEventListener("keyup", keyup, false);
+function keyup(event){
+	var value = document.getElementById('reason').value;
+	if(value == '') value = 'Others';
+	reason = value;
+	//document.getElementById('word1').innerHTML = value;
+	//document.getElementById('open').style.display = 'none';
+}
+
+function setdefaultvalue(label){
+	label_post = label;
+	document.getElementById('open').style.display = 'none';
+}
+
+function clearchoice(){
+	choice = 'None';
+	label_post = 'None';
+	var elems = document.getElementsByClassName('choice');
+	for(i=0; i<elems.length; ++i)
+		elems[i].style.backgroundColor = GENERAL;
+	document.getElementById('open').style.display = 'none';
+}
+
+function setupchoice(div){
+	choice = div.getAttribute("value");
+	label_post = choice;
+	if(choice == 'Others')
+		document.getElementById('open').style.display = 'block';
+	div.style.backgroundColor = CHOSEN;
+}
+
+function light(div){
+	if(choice == div.getAttribute("value")){
+		clearchoice();
+	}else{
+		clearchoice();
+		setupchoice(div);
+	}
+}
+
+function refreshchoice(){
+	choice = 'None';
+	label_post = 'None';
+	reason = 'None';
+	document.getElementById('word1').innerHTML = 'Next';
+	document.getElementById('reason').value = '';
+	clearchoice();
+}
+
+
+// main part
+
+var timestamp;
+
+function replace(page){
+	document.write(page);
+	document.close();
+}
+
+function record(){
+	if(label_post == 'None'){
+		alert('請選擇一個活動類別');
+		return;
+	}
+	if(reason == 'None'){
+		alert('請填寫判斷的依據');
+		return;
+	}
+	var timediff = new Date().getTime() - timestamp;
+	var pic = document.getElementById('pic');
+	$.post("/record/"+pic.getAttribute('value')+"/"+label_post+"/"+timediff+"/"+reason, function(response){
+		//console.log(response);
+		//console.log(response.pic);
+		if(typeof(response) == 'string') replace(response);
+		setpic(response.pic, response.idx, response.ttl);
+	});
+	refreshchoice();
+}
+
+function show(s, idx, ttl){
+	return '('+idx+'/'+ttl+')  '+s.substring(0,4)+'/'+s.substring(4,6)+'/'+s.substring(6,8)+' '+s.substring(9,11)+':'+s.substring(11,13);
+}
+
+function setpic(newpic, newidx, ttlidx){
+	picObj = document.getElementById('pic');
+	picObj.setAttribute("value", newpic);
+	picObj.src = "http://disa.csie.ntu.edu.tw/~janetyc/data/"+newpic.substring(0,8)+"/image_"+newpic+".jpg";
+	document.getElementById('time').innerHTML = show(newpic, newidx, ttlidx);
+	timestamp = new Date().getTime();
+	/*
+	picObj.onerror = function(){ 
+		$.getJSON('/newpic', function(response){
+			setpic(response.pic);
+		});
+	}
+	*/
+}
+
+
+// initiating
+		
+function buildup(){
+	upper = document.getElementById('upper');
+	for(i=0; i<category.length; ++i){
+		choicecontainer = document.createElement("div");
+		choicecontainer.setAttribute("class", "choicecontainer");
+		middle = document.createElement("div");
+		middle.setAttribute("class", "middle choice");
+		middle.setAttribute("value", category[i]);
+		middle.setAttribute("onclick", "light(this)");
+		floater = document.createElement("div");
+		floater.setAttribute("class", "floater");
+		word = document.createElement("div");
+		word.setAttribute("class", "sword");
+		word.innerHTML = category[i];
+		middle.appendChild(floater);
+		middle.appendChild(word);
+		choicecontainer.appendChild(middle);
+		upper.appendChild(choicecontainer);
+	}
+}
