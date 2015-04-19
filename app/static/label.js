@@ -53,8 +53,8 @@ function refreshchoice(){
 	label_post = 'None';
 	reason = 'None';
 	document.getElementById('word1').innerHTML = 'Next';
-	document.getElementById('word1').innerHTML = '';
-	document.getElementById('reason').value = 'None';
+	//document.getElementById('word1').innerHTML = '';
+	document.getElementById('reason').value = "";
 	clearchoice();
 }
 
