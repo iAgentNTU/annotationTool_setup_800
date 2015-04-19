@@ -72,7 +72,7 @@ function record(){
 		alert('請選擇一個活動類別');
 		return;
 	}
-	if(reason == 'None'){
+	if(reason == 'None'||reason == ""){
 		alert('請填寫判斷的依據');
 		return;
 	}
