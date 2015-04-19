@@ -17,15 +17,15 @@
 	<link rel="stylesheet" href="{{ url_for('static', filename='label.css') }}">
 	<div class="page-header" align="center">
 		<div id="picturearea" align="center">
-			<h1 align="center">What is the activity in this picture?</h1>
+			<h2 align="center">請判斷下圖為何種活動？</h2>
     			<div id="picframe" align="center" style="width: 80%">
 				<img id="pic" style="width: 50%; height: 50%">
 			</div>
     			<h2 id="time" align="center"></h2><br>
 			<div id="upper" class="row"></div>
 			<div id="lower">
-				<h3 align="left" >Please descripe the reason why you choose it.</h3>
-                <textarea id = "reason" value="None" placeholder = "請說明您是依據什麼標準來決定該活動？" rows="4" cols="50" style="margin: 0px; width: 904px; height: 200px;"></textarea>
+				<h4 align="left" >請描述您選擇該活動的原因 (請用中文作答)</h4>
+                <textarea id = "reason" value="None" placeholder = "請說明您是依據什麼標準來決定該活動？" rows="4" cols="50" style="margin: 0px; width: 550px; height: 200px;"></textarea>
 				<!--
 				<div class="choice long" value="Others" onclick="light(this)">
 					<div class="floater"></div>

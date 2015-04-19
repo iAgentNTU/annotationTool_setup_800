@@ -1,7 +1,7 @@
 var choice = 'None';
 var label_post = 'None';
 var reason = 'None';
-var category = ['Meeting', 'Lecture', 'Study', 'Empty'];
+var category = ['開會', '上課', '自習/休閒', '無活動'];
 const GENERAL = '#33FFFF';
 const CHOSEN = '#91C7FF';
 
@@ -11,7 +11,7 @@ const CHOSEN = '#91C7FF';
 document.addEventListener("keyup", keyup, false);
 function keyup(event){
 	var value = document.getElementById('reason').value;
-	if(value == '') value = 'None';
+	if(value == "") value = 'None';
 	reason = value;
 	//document.getElementById('word1').innerHTML = value;
 	//document.getElementById('open').style.display = 'none';
