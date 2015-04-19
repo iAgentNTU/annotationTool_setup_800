@@ -11,7 +11,7 @@ const CHOSEN = '#91C7FF';
 document.addEventListener("keyup", keyup, false);
 function keyup(event){
 	var value = document.getElementById('reason').value;
-	if(value == '') value = 'Others';
+	if(value == '') value = 'None';
 	reason = value;
 	//document.getElementById('word1').innerHTML = value;
 	//document.getElementById('open').style.display = 'none';
@@ -53,7 +53,8 @@ function refreshchoice(){
 	label_post = 'None';
 	reason = 'None';
 	document.getElementById('word1').innerHTML = 'Next';
-	document.getElementById('reason').value = '';
+	document.getElementById('word1').innerHTML = '';
+	document.getElementById('reason').value = 'None';
 	clearchoice();
 }
 
@@ -72,7 +73,7 @@ function record(){
 		alert('請選擇一個活動類別');
 		return;
 	}
-	if(reason == 'None'||reason == ""){
+	if(reason == 'None' || reason == ""){
 		alert('請填寫判斷的依據');
 		return;
 	}
