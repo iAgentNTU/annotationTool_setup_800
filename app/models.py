@@ -46,6 +46,7 @@ class User(UserMixin, db.Model):
     # picturepool = db.Column(db.String(20000))
     progress = db.Column(db.Integer(11))
     total = db.Column(db.Integer(11))
+    start = db.Column(db.Integer(11))
 
     @property
     def password(self):

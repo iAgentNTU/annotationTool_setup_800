@@ -25,26 +25,24 @@ function setdefaultvalue(label){
 function clearchoice(){
 	choice = 'None';
 	label_post = 'None';
-	var elems = document.getElementsByClassName('choice');
-	for(i=0; i<elems.length; ++i)
-		elems[i].style.backgroundColor = GENERAL;
+	$('.choice').removeClass('active');
 	document.getElementById('open').style.display = 'none';
 }
 
-function setupchoice(div){
-	choice = div.getAttribute("value");
+function setupchoice(button){
+	choice = button.getAttribute("value");
 	label_post = choice;
 	if(choice == 'Others')
 		document.getElementById('open').style.display = 'block';
-	div.style.backgroundColor = CHOSEN;
+	$(button).addClass("active");
 }
 
-function light(div){
-	if(choice == div.getAttribute("value")){
+function light(button){
+	if(choice == button.getAttribute("value")){
 		clearchoice();
 	}else{
 		clearchoice();
-		setupchoice(div);
+		setupchoice(button);
 	}
 }
 
@@ -52,7 +50,7 @@ function refreshchoice(){
 	choice = 'None';
 	label_post = 'None';
 	reason = 'None';
-	document.getElementById('word1').innerHTML = 'Next';
+	//document.getElementById('next').innerHTML = 'Next';
 	//document.getElementById('word1').innerHTML = '';
 	document.getElementById('reason').value = "";
 	clearchoice();
@@ -69,6 +67,8 @@ function replace(page){
 }
 
 function record(){
+	console.log(label_post);
+	console.log(reason);
 	if(label_post == 'None'){
 		alert('請選擇一個活動類別');
 		return;
@@ -112,21 +112,15 @@ function setpic(newpic, newidx, ttlidx){
 		
 function buildup(){
 	upper = document.getElementById('upper');
+	choicecontainer = document.createElement("div");
+	choicecontainer.setAttribute("class", "btn-group");
 	for(i=0; i<category.length; ++i){
-		choicecontainer = document.createElement("div");
-		choicecontainer.setAttribute("class", "choicecontainer");
-		middle = document.createElement("div");
-		middle.setAttribute("class", "middle choice");
+		middle = document.createElement("button");
+		middle.setAttribute("class", "choice btn btn-lg btn-default");
 		middle.setAttribute("value", category[i]);
 		middle.setAttribute("onclick", "light(this)");
-		floater = document.createElement("div");
-		floater.setAttribute("class", "floater");
-		word = document.createElement("div");
-		word.setAttribute("class", "sword");
-		word.innerHTML = category[i];
-		middle.appendChild(floater);
-		middle.appendChild(word);
+		middle.innerHTML = category[i];
 		choicecontainer.appendChild(middle);
-		upper.appendChild(choicecontainer);
 	}
+	upper.appendChild(choicecontainer);
 }

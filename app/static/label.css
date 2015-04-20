@@ -26,10 +26,6 @@
 	font-size: 150%
 }
 
-.choice{
-	background-color: #33FFFF;
-}
-
 @media (min-width: 980px) {
 	.choicecontainer{
 		width: 25%; 
