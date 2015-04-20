@@ -1,7 +1,8 @@
 var choice = 'None';
 var label_post = 'None';
 var reason = 'None';
-var category = ['開會', '上課', '自習/休閒', '無活動'];
+var category = ['Meeting', 'Lecture', 'Study', 'Empty'];
+var expression = ['開會', '上課', '自習/休閒', '無活動'];
 const GENERAL = '#33FFFF';
 const CHOSEN = '#91C7FF';
 
@@ -119,7 +120,7 @@ function buildup(){
 		middle.setAttribute("class", "choice btn btn-lg btn-default");
 		middle.setAttribute("value", category[i]);
 		middle.setAttribute("onclick", "light(this)");
-		middle.innerHTML = category[i];
+		middle.innerHTML = expression[i];
 		choicecontainer.appendChild(middle);
 	}
 	upper.appendChild(choicecontainer);
