@@ -47,7 +47,8 @@ def register():
                 username=form.username.data,
                 password=form.password.data,
                 progress=0,
-                total=Pictures.query.count())
+                start=0,
+                total=150)
     db.session.add(user)
     db.session.commit()
     flash('You can now login.')
